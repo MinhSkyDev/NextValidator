@@ -1,4 +1,4 @@
-import { IParamValidationRule, IValidationRule } from "./interface-validator";
+import { IParamValidationRule } from "./interface-validator";
 
 
 export class MinStringValidationRule implements IParamValidationRule {
@@ -19,8 +19,13 @@ export class MinStringValidationRule implements IParamValidationRule {
     evaluate(target: any, value: any, key: string): string | null {
         let currentString: string = value;
         
-        if(currentString.length < this.minSize){
-            return `Current must not lower than ${this.minSize}`;
+        if(currentString){
+            if(currentString.length < this.minSize){
+                return `Current must not lower than ${this.minSize}`;
+            }
+        }
+        else{
+            return '${key} is required';
         }
         return null;
     }
