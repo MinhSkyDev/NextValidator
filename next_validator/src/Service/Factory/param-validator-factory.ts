@@ -1,5 +1,6 @@
 import { DumbValidationRule } from "../../Validator/dumb-validator";
 import { IValidationRule } from "../../Validator/interface-validator";
+import { MaxStringValidationRule } from "../../Validator/maxString-validator";
 import { MinStringValidationRule } from "../../Validator/minString-validator";
 import { IValidatorAbstractFactory, ValidatorRule } from "./interface-validator-factory";
 
@@ -23,9 +24,10 @@ export class ParamValidatorFactory implements IValidatorAbstractFactory{
             case ValidatorRule.MAXINT:
                 break;
             case ValidatorRule.MAXSTRING:
-                validation = new MinStringValidationRule(this.param as number);
+                validation = new MaxStringValidationRule(this.param as number);
                 break;
             case ValidatorRule.MINSTRING:
+                validation = new MinStringValidationRule(this.param as number);
                 break;
             default:
                 validation = new DumbValidationRule();

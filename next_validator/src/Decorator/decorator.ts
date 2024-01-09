@@ -4,7 +4,6 @@ import { ParamValidatorFactory } from "../Service/Factory/param-validator-factor
 import { ValidatorAbstractFactory } from "../Service/Factory/super-validator-factory";
 import { ValidatorService } from "../Service/validator-service";
 import { IValidationRule } from "../Validator/interface-validator";
-import { MinStringValidationRule } from "../Validator/minString-validator";
 
 
 
@@ -22,7 +21,20 @@ export function minSize(minSize: number){
 
         let rule : IValidationRule = factory.createValidation(ValidatorRule.MINSTRING);
 
-        ValidatorService.getInstance().addValidationRule(target, propertyKey, new MinStringValidationRule(minSize));
+        ValidatorService.getInstance().addValidationRule(target, propertyKey, rule);
+    }
+
+    return minSizeDecorator;
+}
+
+export function maxSize(maxSize: number){
+    function minSizeDecorator(target: any, propertyKey: string): void {
+        let factory : ParamValidatorFactory  = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+            ValidatorRule.MAXSTRING, maxSize) as ParamValidatorFactory;
+
+        let rule : IValidationRule = factory.createValidation(ValidatorRule.MAXSTRING);
+
+        ValidatorService.getInstance().addValidationRule(target, propertyKey, rule);
     }
 
     return minSizeDecorator;
