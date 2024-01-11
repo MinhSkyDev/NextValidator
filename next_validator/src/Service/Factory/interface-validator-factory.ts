@@ -36,6 +36,7 @@ export enum ValidatorRule{
     MAXSTRING,
     IS_IDENTITY_CARD, // Check if the string is in identity card format of a country (country code) 
     //MQL : Strategy Design Pattern
+    CUSTOM,
     END_PARAM,
     
 

@@ -3,6 +3,7 @@ import { NonParamValidatorFactory } from "../Service/Factory/nonparam-validator-
 import { ParamValidatorFactory } from "../Service/Factory/param-validator-factory";
 import { ValidatorAbstractFactory } from "../Service/Factory/super-validator-factory";
 import { ValidatorService } from "../Service/validator-service";
+import { CustomValidationRule } from "../Validator/custom-validator";
 import { IValidationRule } from "../Validator/interface-validator";
 
 
@@ -38,4 +39,17 @@ export function maxSize(maxSize: number){
     }
 
     return minSizeDecorator;
+}
+
+export function custom(customRule: CustomValidationRule){
+    function customDecorator(target: any, propertyKey: string): void {
+        let factory : ParamValidatorFactory  = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+            ValidatorRule.CUSTOM, customRule) as ParamValidatorFactory;
+
+        let rule : IValidationRule = factory.createValidation(ValidatorRule.CUSTOM);
+
+        ValidatorService.getInstance().addValidationRule(target, propertyKey, rule);
+    }
+
+    return customDecorator;
 }

@@ -5,8 +5,8 @@ import { PropertyValidationList } from "./Iterator/property-validator-list";
 export class ValidatorService{
     private static instance: ValidatorService;
     
-    constructor(){
-
+    private constructor(){
+        
     }
 
     public static getInstance(): ValidatorService {

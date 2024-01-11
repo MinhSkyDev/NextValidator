@@ -1,13 +1,14 @@
 import "reflect-metadata";
 import { ValidatorService } from "./Service/validator-service";
 export * from './Decorator/decorator';
+export { CustomValidationBuilder } from './Service/Builder/custom-validator-builder';
 
 
 export class NextValidator{
 
     private static instance: NextValidator;
 
-    constructor(){
+    private constructor(){
 
     }
 
