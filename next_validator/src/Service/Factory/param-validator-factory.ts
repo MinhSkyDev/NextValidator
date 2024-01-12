@@ -1,6 +1,7 @@
 import { CustomValidationRule } from "../../Validator/custom-validator";
 import { DumbValidationRule } from "../../Validator/dumb-validator";
 import { IValidationRule } from "../../Validator/interface-validator";
+import { IdentifyCardValidationRule } from "../../Validator/isIdentifyCard-validator";
 import { MaxStringValidationRule } from "../../Validator/maxString-validator";
 import { MinStringValidationRule } from "../../Validator/minString-validator";
 import { IValidatorAbstractFactory, ValidatorRule } from "./interface-validator-factory";
@@ -33,6 +34,9 @@ export class ParamValidatorFactory implements IValidatorAbstractFactory{
             case ValidatorRule.CUSTOM:
                 validation = this.param as CustomValidationRule;
                 break;
+	        case ValidatorRule.IS_IDENTITY_CARD:
+	            validation = new IdentifyCardValidationRule(this.param as string);
+	            break;                
             default:
                 validation = new DumbValidationRule();
         }

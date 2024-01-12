@@ -53,3 +53,54 @@ export function custom(customRule: CustomValidationRule){
 
     return customDecorator;
 }
+
+export function isIdentifyCard(country: string) {
+  function isIdentifyCardDecorator(target: any, propertyKey: string): void {
+    let factory: ParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+      ValidatorRule.IS_IDENTITY_CARD,
+      country
+    ) as ParamValidatorFactory
+    let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_IDENTITY_CARD)
+
+    ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+  }
+
+  return isIdentifyCardDecorator
+}
+
+export function isEmail(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_EMAIL,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_EMAIL)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+}
+
+export function isHexa(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_HEXA,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_HEXA)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+}
+
+export function isOct(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_OCT,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_OCT)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+}
+
+export function isBit(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_BIT,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_BIT)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+}
+

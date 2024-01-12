@@ -18,7 +18,7 @@ export enum ValidatorRule{
     IS_APLHA_NUMERIC, // Checks if the string contains only letters and numbers
     IS_BIT, // check if the string is BIT
     IS_HEXA,
-    IS_OTC,
+    IS_OCT,
     IS_DATA_URI,
     IS_EMAIL,
     END_NON_PARAM,
