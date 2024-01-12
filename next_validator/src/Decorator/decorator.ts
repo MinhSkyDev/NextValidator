@@ -1,41 +1,95 @@
-import { ValidatorRule } from "../Service/Factory/interface-validator-factory";
-import { NonParamValidatorFactory } from "../Service/Factory/nonparam-validator-factory";
-import { ParamValidatorFactory } from "../Service/Factory/param-validator-factory";
-import { ValidatorAbstractFactory } from "../Service/Factory/super-validator-factory";
-import { ValidatorService } from "../Service/validator-service";
-import { IValidationRule } from "../Validator/interface-validator";
-
-
+import { ValidatorRule } from '../Service/Factory/interface-validator-factory'
+import { NonParamValidatorFactory } from '../Service/Factory/nonparam-validator-factory'
+import { ParamValidatorFactory } from '../Service/Factory/param-validator-factory'
+import { ValidatorAbstractFactory } from '../Service/Factory/super-validator-factory'
+import { ValidatorService } from '../Service/validator-service'
+import { IValidationRule } from '../Validator/interface-validator'
 
 export function required(target: any, propertyKey: string) {
-    let factory : NonParamValidatorFactory  = ValidatorAbstractFactory.getInstance().getValidtorFactory(
-        ValidatorRule.REQUIRED, null );
-    let rule : IValidationRule = factory.createValidation(ValidatorRule.REQUIRED);
-    ValidatorService.getInstance().addValidationRule(target,propertyKey, rule);
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.REQUIRED,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.REQUIRED)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
 }
 
-export function minSize(minSize: number){
-    function minSizeDecorator(target: any, propertyKey: string): void {
-        let factory : ParamValidatorFactory  = ValidatorAbstractFactory.getInstance().getValidtorFactory(
-            ValidatorRule.MINSTRING, minSize) as ParamValidatorFactory;
+export function minSize(minSize: number) {
+  function minSizeDecorator(target: any, propertyKey: string): void {
+    let factory: ParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+      ValidatorRule.MINSTRING,
+      minSize
+    ) as ParamValidatorFactory
 
-        let rule : IValidationRule = factory.createValidation(ValidatorRule.MINSTRING);
+    let rule: IValidationRule = factory.createValidation(ValidatorRule.MINSTRING)
 
-        ValidatorService.getInstance().addValidationRule(target, propertyKey, rule);
-    }
+    ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+  }
 
-    return minSizeDecorator;
+  return minSizeDecorator
 }
 
-export function maxSize(maxSize: number){
-    function minSizeDecorator(target: any, propertyKey: string): void {
-        let factory : ParamValidatorFactory  = ValidatorAbstractFactory.getInstance().getValidtorFactory(
-            ValidatorRule.MAXSTRING, maxSize) as ParamValidatorFactory;
+export function maxSize(maxSize: number) {
+  function minSizeDecorator(target: any, propertyKey: string): void {
+    let factory: ParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+      ValidatorRule.MAXSTRING,
+      maxSize
+    ) as ParamValidatorFactory
 
-        let rule : IValidationRule = factory.createValidation(ValidatorRule.MAXSTRING);
+    let rule: IValidationRule = factory.createValidation(ValidatorRule.MAXSTRING)
 
-        ValidatorService.getInstance().addValidationRule(target, propertyKey, rule);
-    }
+    ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+  }
 
-    return minSizeDecorator;
+  return minSizeDecorator
+}
+
+export function isIdentifyCard(country: string) {
+  function isIdentifyCardDecorator(target: any, propertyKey: string): void {
+    let factory: ParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+      ValidatorRule.IS_IDENTITY_CARD,
+      country
+    ) as ParamValidatorFactory
+    let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_IDENTITY_CARD)
+
+    ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+  }
+
+  return isIdentifyCardDecorator
+}
+
+export function isEmail(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_EMAIL,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_EMAIL)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+}
+
+export function isHexa(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_HEXA,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_HEXA)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+}
+
+export function isOct(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_OCT,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_OCT)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
+}
+
+export function isBit(target: any, propertyKey: string) {
+  let factory: NonParamValidatorFactory = ValidatorAbstractFactory.getInstance().getValidtorFactory(
+    ValidatorRule.IS_BIT,
+    null
+  )
+  let rule: IValidationRule = factory.createValidation(ValidatorRule.IS_BIT)
+  ValidatorService.getInstance().addValidationRule(target, propertyKey, rule)
 }

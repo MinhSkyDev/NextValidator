@@ -1,39 +1,41 @@
-import { DumbValidationRule } from "../../Validator/dumb-validator";
-import { IValidationRule } from "../../Validator/interface-validator";
-import { MaxStringValidationRule } from "../../Validator/maxString-validator";
-import { MinStringValidationRule } from "../../Validator/minString-validator";
-import { IValidatorAbstractFactory, ValidatorRule } from "./interface-validator-factory";
+import { DumbValidationRule } from '../../Validator/dumb-validator'
+import { IValidationRule } from '../../Validator/interface-validator'
+import { IdentifyCardValidationRule } from '../../Validator/isIdentifyCard-validator'
+import { MaxStringValidationRule } from '../../Validator/maxString-validator'
+import { MinStringValidationRule } from '../../Validator/minString-validator'
+import { IValidatorAbstractFactory, ValidatorRule } from './interface-validator-factory'
 
-export class ParamValidatorFactory implements IValidatorAbstractFactory{
-    
-    private param: any;
+export class ParamValidatorFactory implements IValidatorAbstractFactory {
+  private param: any
 
-    public setParam(param : any){
-        this.param = param;
+  public setParam(param: any) {
+    this.param = param
+  }
+
+  public getParam(): any {
+    return this.param
+  }
+
+  createValidation(ruleName: ValidatorRule): IValidationRule {
+    let validation: IValidationRule = new DumbValidationRule()
+    switch (ruleName) {
+      case ValidatorRule.MININT:
+        break
+      case ValidatorRule.MAXINT:
+        break
+      case ValidatorRule.MAXSTRING:
+        validation = new MaxStringValidationRule(this.param as number)
+        break
+      case ValidatorRule.MINSTRING:
+        validation = new MinStringValidationRule(this.param as number)
+        break
+      case ValidatorRule.IS_IDENTITY_CARD:
+        validation = new IdentifyCardValidationRule(this.param as string)
+        break
+      default:
+        validation = new DumbValidationRule()
     }
 
-    public getParam() : any{
-        return this.param;
-    }
-
-    createValidation(ruleName : ValidatorRule) : IValidationRule{
-        let validation : IValidationRule = new DumbValidationRule();
-        switch(ruleName){
-            case ValidatorRule.MININT:
-                break;
-            case ValidatorRule.MAXINT:
-                break;
-            case ValidatorRule.MAXSTRING:
-                validation = new MaxStringValidationRule(this.param as number);
-                break;
-            case ValidatorRule.MINSTRING:
-                validation = new MinStringValidationRule(this.param as number);
-                break;
-            default:
-                validation = new DumbValidationRule();
-        }
-
-        return validation;
-    }
-
+    return validation
+  }
 }

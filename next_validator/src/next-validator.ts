@@ -1,26 +1,21 @@
-import "reflect-metadata";
-import { ValidatorService } from "./Service/validator-service";
-export * from './Decorator/decorator';
+import 'reflect-metadata'
+import { ValidatorService } from './Service/validator-service'
+export * from './Decorator/decorator'
 
+export class NextValidator {
+  private static instance: NextValidator
 
-export class NextValidator{
+  private constructor() {}
 
-    private static instance: NextValidator;
-
-    constructor(){
-
+  public static getInstance(): NextValidator {
+    if (!NextValidator.instance) {
+      NextValidator.instance = new NextValidator()
     }
 
-    public static getInstance(): NextValidator {
-        if (!NextValidator.instance) {
-            NextValidator.instance = new NextValidator();
-        }
+    return NextValidator.instance
+  }
 
-        return NextValidator.instance;
-    }
-
-    public validate(target: any){
-        return ValidatorService.getInstance().validate(target);
-    }
+  public validate(target: any) {
+    return ValidatorService.getInstance().validate(target)
+  }
 }
-
