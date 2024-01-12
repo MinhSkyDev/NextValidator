@@ -59,5 +59,5 @@ customer.notEmail = "esdsa@dsada@  sda.com.sa";
 var validator = next_validator_1.NextValidator.getInstance();
 console.log(validator.validate(customer)); // 'lastName' is required 
 
-const testRegex = /^[0-7]+/
-console.log(testRegex.test("1010010901"))
+const testRegex = /^[0-7]+$/
+console.log(testRegex.test("21289"))
