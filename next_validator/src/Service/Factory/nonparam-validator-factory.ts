@@ -1,6 +1,10 @@
 import { DumbValidationRule } from '../../Validator/dumb-validator'
 import { IValidationRule } from '../../Validator/interface-validator'
+import { AlphaValidationRule } from '../../Validator/isAlpha-validator'
+import { AlphaNumericValidationRule } from '../../Validator/isAlphaNumeric-validator'
 import { BitValidationRule } from '../../Validator/isBit-validator'
+import { BlankValidationRule } from '../../Validator/isBlank-validator'
+import { DateValidationRule } from '../../Validator/isDate-validator'
 import { EmailValidationRule } from '../../Validator/isEmail-validator'
 import { HexaValidationRule } from '../../Validator/isHexa-validator'
 import { OctValidationRule } from '../../Validator/isOct-validator'
@@ -9,23 +13,27 @@ import { IValidatorAbstractFactory, ValidatorRule } from './interface-validator-
 
 export class NonParamValidatorFactory implements IValidatorAbstractFactory {
   createValidation(ruleName: ValidatorRule): IValidationRule {
-        let validation : IValidationRule = new DumbValidationRule();
+    let validation: IValidationRule = new DumbValidationRule()
 
     switch (ruleName) {
       case ValidatorRule.REQUIRED:
-                validation = new RequiredValidationRule();
+        validation = new RequiredValidationRule()
       case ValidatorRule.NEGATIVE:
-                break;
+        break
       case ValidatorRule.POSITIVE:
-                break;
+        break
       case ValidatorRule.BLANK:
-                break;
+        validation = new BlankValidationRule()
+        break
       case ValidatorRule.IS_DATE:
-                break;
+        validation = new DateValidationRule()
+        break
       case ValidatorRule.IS_ALPHA:
-                break;
+        validation = new AlphaValidationRule()
+        break
       case ValidatorRule.IS_APLHA_NUMERIC:
-                break;
+        validation = new AlphaNumericValidationRule()
+        break
       case ValidatorRule.IS_BIT:
         validation = new BitValidationRule()
         break
@@ -36,15 +44,15 @@ export class NonParamValidatorFactory implements IValidatorAbstractFactory {
         validation = new OctValidationRule()
         break
       case ValidatorRule.IS_DATA_URI:
-                break;
+        break
       case ValidatorRule.IS_EMAIL:
-                validation = new EmailValidationRule();
-                break;
+        validation = new EmailValidationRule()
+        break
       default:
-                validation = new DumbValidationRule();
-                break;
+        validation = new DumbValidationRule()
+        break
     }
 
-        return validation;
+    return validation
   }
 }
